@@ -1,23 +1,22 @@
 import axios from 'axios'
 
+// TODO 改为配置项
+var baseUrl = 'http://localhost:8080'
+
 const service = axios.create({
+    baseURL: baseUrl,
     timeout: 120000, // request timeout
     method: 'post',
     headers: { 'Content-Type': 'application/json; charset=utf-8' }
 })
 
 // 登录token
-export let requestInfo = { 
-    token: null
-};
+export let requestInfo = { token: null };
 
 service.interceptors.request.use((config) => {
     if (requestInfo.token) {
         config.headers['_TK']  = requestInfo.token
     }
-    config.url = global.defaultBaseUrl + config.url
-    console.log('打印',config.url)
-
 
     return config
 }, error => {
