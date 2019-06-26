@@ -1,6 +1,35 @@
-const express = require('express')
+const express = require('express');
+const session = require('express-session');
+const bodyParser = require('body-parser');
+const cors = require('cors');
+const connection = require('./Config/MySQL');
+
+// 配置路由
+const routes = require('./Routes')
+
 const app = express()
 
-app.get('/', (req, res) => res.send('Hello World!'))
+// 开启静态文件托管
+app.use('./Public',express.static('public'));
 
-app.listen(3000, () => console.log('Example app listening on port 3000!'))
+// 解决跨域
+app.use(cors());
+
+// 设置端口
+app.set('port',process.env.PORT || 3031);
+
+connection.connect()
+
+// 解析url
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
+
+routes(app);
+
+//开启监听端口
+app.listen(app.get('port'), () => {
+    console.log('Express started on http://localhost:' +
+	app.get('port') + '; press Ctrl-c to terminate.');
+});
