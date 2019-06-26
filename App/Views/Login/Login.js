@@ -45,7 +45,7 @@ class Login extends Component {
             </View>
 
             <View style={styles.loginBox}>
-                <InputItem clear type="phone" value={this.state.userName} 
+                <InputItem clear value={this.state.userName} 
                   onChange={value => {
                     this.setState({
                       userName: value,

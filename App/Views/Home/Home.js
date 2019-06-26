@@ -8,13 +8,17 @@ import { loginRequest } from '../../Actions/LoginAction'
 // Styles
 import styles from './Styles/HomeStyle'
 
-export default class Home extends Component {
+class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
       userName: '',
       passWord: ''
     };
+  }
+
+  componentDidMount(){
+    console.log(this.props)
   }
 
   render () {
@@ -25,8 +29,22 @@ export default class Home extends Component {
           backgroundColor="#5175F0"
         />
         
-        <Text>主页面</Text>
+        <Text>欢迎用户:{this.props.state.phone}</Text>
       </View>
     )
   }
 }
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+      // loginRequest: (userName, passWord) => dispatch(loginRequest(userName, passWord))
+  }
+}
+
+const mapStateToProps = (state) => {
+  return {
+      state: state.login
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home)

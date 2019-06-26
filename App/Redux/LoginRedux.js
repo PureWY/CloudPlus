@@ -3,6 +3,7 @@ import * as actionType from '../Actions/Type';
 
 const initialState = {
   userName: null,
+  phone: null,
   fetching: false,
   error: null,
   token: null
@@ -17,6 +18,7 @@ const loginReducer = handleActions({
     }),
     [actionType.LOGIN_SUCCESS]: (state, action) =>({
         ...state,
+        ...action.payload,
         fetching: false
         // token: action.payload.token
     }),
