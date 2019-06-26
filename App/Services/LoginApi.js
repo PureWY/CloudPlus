@@ -5,7 +5,7 @@ const create = () => {
 
   const loginRequest = (data) => {
     return request.post(
-      '/imap/home/login',
+      '/login',
       data
     )
   }

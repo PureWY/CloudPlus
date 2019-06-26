@@ -1,6 +1,7 @@
 import { put, select, call } from 'redux-saga/effects'
 import { Alert, ToastAndroid } from 'react-native'
 import { loginSuccess, loginFailure } from '../Actions/LoginAction'
+import { NavigationActions } from 'react-navigation'
 
 // process LOGIN_REQUEST actions
 export function * login (api, action) {
@@ -8,11 +9,12 @@ export function * login (api, action) {
     let res = null
     try {
         res = yield call(api.loginRequest, {
-            userAccount: userName,
-            password: passWord
+            userName: userName,
+            passWord: passWord
         });
         if(res.data.code == '200'){
-            
+            yield put(loginSuccess());
+            yield put(NavigationActions.navigate({routeName: 'Home'}));
         }else{
             yield put(loginFailure());
         }

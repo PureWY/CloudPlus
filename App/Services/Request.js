@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 // TODO 改为配置项
-var baseUrl = 'http://localhost:8080'
+var baseUrl = 'http://192.168.43.10:3031'
 
 const service = axios.create({
     baseURL: baseUrl,

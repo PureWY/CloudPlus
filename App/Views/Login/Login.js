@@ -2,17 +2,26 @@ import React, { Component } from 'react'
 import { ScrollView, Text, Image, View, StatusBar } from 'react-native'
 import { Button, InputItem, List, WhiteSpace } from '@ant-design/react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import { connect } from 'react-redux'
+import { loginRequest } from '../../Actions/LoginAction'
 
 // Styles
 import styles from './Styles/LoginStyle'
 
-export default class LaunchScreen extends Component {
+class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
       userName: '',
       passWord: ''
     };
+  }
+
+  login() {
+    this.props.loginRequest({
+        userName: this.state.userName,
+        passWord: this.state.passWord
+    })
   }
 
   render () {
@@ -68,7 +77,7 @@ export default class LaunchScreen extends Component {
                   <Text style={styles.passwordStyle}>忘记密码？</Text>
                 </View>   
                 <WhiteSpace size="lg" /> 
-                <Button type="primary" style={styles.loginBtn}>登录</Button>
+                <Button type="primary" onPress={() => { this.login() }} style={styles.loginBtn}>登录</Button>
                 <WhiteSpace size="lg" /> 
                 <Button style={styles.registerBtn}>
                   <Text style={styles.mainColorFont}>注册</Text>
@@ -106,3 +115,17 @@ export default class LaunchScreen extends Component {
     )
   }
 }
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+      loginRequest: (userName, passWord) => dispatch(loginRequest(userName, passWord))
+  }
+}
+
+const mapStateToProps = (state) => {
+  return {
+      fetching: state.login.fetching
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login)
