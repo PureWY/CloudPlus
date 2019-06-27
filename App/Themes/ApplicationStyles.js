@@ -34,8 +34,15 @@ const ApplicationStyles = {
       marginVertical: Metrics.smallMargin,
       textAlign: 'center'
     },
-    subtitle: {
+    subTitle: {
       color: Colors.snow,
+      fontSize: 16,
+      padding: Metrics.smallMargin,
+      marginBottom: Metrics.smallMargin,
+      marginHorizontal: Metrics.smallMargin
+    },
+    noChoose: {
+      color: Colors.grey,
       fontSize: 16,
       padding: Metrics.smallMargin,
       marginBottom: Metrics.smallMargin,

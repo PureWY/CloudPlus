@@ -1,3 +1,4 @@
+import React from 'react';
 import { createStackNavigator, createBottomTabNavigator, createAppContainer } from 'react-navigation';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import Login from '../Views/Login/Login';
@@ -9,13 +10,22 @@ import styles from './Styles/NavigationStyles';
 
 const TabNav = createBottomTabNavigator({
     Home: {
-      screen: Home
+        screen: Home,
+        navigationOptions: {
+            tabBarLabel: '首页'
+        }
     },
     Message: {
-      screen: Message
+        screen: Message,
+        navigationOptions: {
+            tabBarLabel: '消息'
+        }
     },
     User: {
-      screen: User
+        screen: User,
+        navigationOptions: {
+            tabBarLabel: '个人中心'
+        }
     }
 }, {
     swipeEnabled: true,
@@ -37,8 +47,11 @@ const TabNav = createBottomTabNavigator({
         },
     }),
     tabBarOptions: {
-        activeTintColor: 'blue',
+        activeTintColor: '#438DEF',
         inactiveTintColor: 'gray',
+        labelStyle: {
+            fontSize: 13
+        }
     },
 })
 

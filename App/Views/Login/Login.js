@@ -13,8 +13,16 @@ class Login extends Component {
     super(props);
     this.state = {
       userName: '',
-      passWord: ''
+      passWord: '',
+      confirmPass: '',
+      checkCode: '',
+      phone: '',
+      isRegister: false,
+      isPhoneLogin: false,
+      chooseAccount: true
     };
+
+    this.checkLoginType = this.checkLoginType.bind(this)
   }
 
   login() {
@@ -22,6 +30,196 @@ class Login extends Component {
         userName: this.state.userName,
         passWord: this.state.passWord
     })
+  }
+
+  checkLoginType(){
+    this.setState({
+      chooseAccount: !this.state.chooseAccount,
+      isPhoneLogin: !this.state.isPhoneLogin
+    })
+  }
+
+  toRegister(){
+    this.setState({
+      isRegister: !this.state.isRegister,
+      userName: '',
+      passWord: '',
+      confirmPass: '',
+      checkCode: '',
+      phone: ''
+    })
+  }
+
+  loginComponent = () => {
+    return (
+      <View style={styles.loginBox}>
+        {this.state.isPhoneLogin?
+          <InputItem value={this.state.userName} 
+            onChange={value => {
+              this.setState({
+                userName: value,
+              });
+            }}
+            style={styles.inputStyle}
+            placeholder="请输入手机号码"
+            last="true"
+            labelNumber={1.5}
+          >
+          <FontAwesome
+            style={styles.formIconStyle}
+            name={'mobile'}
+            size={30}
+          />
+          </InputItem>:
+          <InputItem value={this.state.userName} 
+          onChange={value => {
+            this.setState({
+              userName: value,
+            });
+          }}
+          style={styles.inputStyle}
+          placeholder="请输入账号"
+          last="true"
+          labelNumber={1.5}
+        >
+        <FontAwesome
+          style={styles.formIconStyle}
+          name={'mobile'}
+          size={30}
+        />
+        </InputItem>}
+          <WhiteSpace size="lg" />
+          {this.state.isPhoneLogin?
+         <View style={styles.codeBox}>
+         <View style={styles.inputContainer}>
+           <InputItem value={this.state.checkCode} 
+             onChange={value => {
+               this.setState({
+                 passWord: value,
+               });
+             }}
+             style={styles.inputStyle}
+             labelNumber={1.5}
+             placeholder="请输入验证码"
+             last="true"
+           >
+           <FontAwesome
+             style={styles.formIconStyle}
+             name={'check-square'}
+             size={22}
+           />
+           </InputItem>  
+         </View> 
+         <View style={styles.codeContainer}>
+           <Button style={styles.codeBtn}>
+             <Text style={styles.codeFont}>验证码</Text>
+           </Button>
+         </View>
+       </View>:
+      <InputItem type="password" value={this.state.passWord} 
+      onChange={value => {
+        this.setState({
+          passWord: value,
+        });
+      }}
+      labelNumber={1.5}
+      style={styles.inputStyle}
+      placeholder="请输入密码"
+      last="true"
+    >
+    <FontAwesome
+      style={styles.formIconStyle}
+      name={'lock'}
+      size={25}
+    />
+    </InputItem>}
+          <WhiteSpace size="lg" /> 
+          <View style={styles.forgetPassword}>
+            <Text style={styles.passwordStyle}>忘记密码？</Text>
+          </View>   
+          <WhiteSpace size="lg" /> 
+          <Button type="primary" onPress={() => { this.login() }} style={styles.loginBtn}>登录</Button>
+          <WhiteSpace size="lg" /> 
+          <Button onPress={()=>{this.toRegister()}} style={styles.registerBtn}>
+            <Text style={styles.mainColorFont}>注册</Text>
+          </Button>
+      </View>
+    )
+  }
+
+  registerComponent = () => {
+    return (
+      <View style={styles.registerBox}>
+          <InputItem value={this.state.userName} 
+            onChange={value => {
+              this.setState({
+                userName: value,
+              });
+            }}
+            style={styles.inputStyle}
+            labelNumber={1.5}
+            placeholder="请输入手机号"
+            last="true"
+          >
+          <FontAwesome
+            style={styles.formIconStyle}
+            name={'mobile'}
+            size={30}
+          />
+          </InputItem>
+          <WhiteSpace size="lg" />
+          <InputItem type="password" value={this.state.passWord} 
+            onChange={value => {
+              this.setState({
+                passWord: value,
+              });
+            }}
+            style={styles.inputStyle}
+            labelNumber={1.5}
+            placeholder="请输入密码"
+            last="true"
+          >
+           <FontAwesome
+            style={styles.formIconStyle}
+            name={'lock'}
+            size={25}
+          />
+          </InputItem>
+          <WhiteSpace size="lg" /> 
+          <View style={styles.codeBox}>
+            <View style={styles.inputContainer}>
+              <InputItem value={this.state.checkCode} 
+                onChange={value => {
+                  this.setState({
+                    passWord: value,
+                  });
+                }}
+                style={styles.inputStyle}
+                labelNumber={1.5}
+                placeholder="请输入验证码"
+                last="true"
+              >
+              <FontAwesome
+                style={styles.formIconStyle}
+                name={'check-square'}
+                size={22}
+              />
+              </InputItem>  
+            </View> 
+            <View style={styles.codeContainer}>
+              <Button style={styles.codeBtn}>
+                <Text style={styles.codeFont}>验证码</Text>
+              </Button>
+            </View>
+          </View>
+          <WhiteSpace size="lg" /> 
+          <Button type="primary" onPress={() => { this.login() }} style={styles.loginBtn}>注册</Button>
+          <WhiteSpace size="lg" /> 
+          <Button onPress={()=>{this.toRegister()}} style={styles.registerBtn}>
+            <Text style={styles.mainColorFont}>返回登录</Text>
+          </Button>
+      </View>
+    )
   }
 
   render () {
@@ -32,57 +230,19 @@ class Login extends Component {
           backgroundColor="#5175F0"
         />
         {/* <Image source={Images.cloudMain} style={[styles.backgroundImage,styles.launchBackground]} resizeMode='stretch' /> */}
-        <ScrollView style={styles.container}>
+        <ScrollView keyboardShouldPersistTaps="handled" style={styles.container}>
           <View style={styles.loginHeader}>
             <Text style={styles.sectionText}>云 加 </Text>
           </View>
 
           <View style={styles.loginContainer} >
             <View style={styles.loginType}>
-              <Text style={styles.subtitle}>账号密码登录</Text>
-              <Text style={styles.subtitle}>|</Text>
-              <Text style={styles.subtitle}>手机号快捷登录</Text>
+              <Text onPress={()=>{this.checkLoginType()}} style={this.state.chooseAccount?styles.subTitle:styles.noChoose}>账号密码登录</Text>
+              <Text style={styles.subTitle}>|</Text>
+              <Text onPress={()=>{this.checkLoginType()}} style={!this.state.chooseAccount?styles.subTitle:styles.noChoose}>手机号快捷登录</Text>
             </View>
 
-            <View style={styles.loginBox}>
-                <InputItem clear value={this.state.userName} 
-                  onChange={value => {
-                    this.setState({
-                      userName: value,
-                    });
-                  }}
-                  style={styles.inputStyle}
-                  labelNumber={2}
-                  placeholder="请输入账号"
-                  last="true"
-                >
-                账号
-                </InputItem>
-                <WhiteSpace size="lg" />
-                <InputItem clear type="password" value={this.state.passWord} 
-                  onChange={value => {
-                    this.setState({
-                      passWord: value,
-                    });
-                  }}
-                  style={styles.inputStyle}
-                  labelNumber={2}
-                  placeholder="请输入密码"
-                  last="true"
-                >
-                密码
-                </InputItem>
-                <WhiteSpace size="lg" /> 
-                <View style={styles.forgetPassword}>
-                  <Text style={styles.passwordStyle}>忘记密码？</Text>
-                </View>   
-                <WhiteSpace size="lg" /> 
-                <Button type="primary" onPress={() => { this.login() }} style={styles.loginBtn}>登录</Button>
-                <WhiteSpace size="lg" /> 
-                <Button style={styles.registerBtn}>
-                  <Text style={styles.mainColorFont}>注册</Text>
-                </Button>
-            </View>
+            {this.state.isRegister?this.registerComponent() : this.loginComponent()}
 
             <View style={styles.othersLogin}>
                 <View style={styles.othersHeader}>

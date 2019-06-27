@@ -34,8 +34,17 @@ export default StyleSheet.create({
     flexDirection: 'row'
   },
   loginBox: {
-    width: Metrics.screenWidth/1.3,
+    width: Metrics.screenWidth/1.2,
     height: Metrics.screenHeight/2,
+    backgroundColor: Colors.snow,
+    borderRadius: Metrics.borderRadius,
+    elevation: 20,
+    padding: Metrics.doubleBasePadding,
+    paddingTop: 40
+  },
+  registerBox: {
+    width: Metrics.screenWidth/1.2,
+    height: Metrics.screenHeight/1.8,
     backgroundColor: Colors.snow,
     borderRadius: Metrics.borderRadius,
     elevation: 20,
@@ -47,7 +56,27 @@ export default StyleSheet.create({
     borderWidth: 1,
     borderStyle: "solid",
     borderRadius: 50,
-    paddingLeft: 10
+    paddingLeft: 10,
+  },
+  inputContainer: {
+    width: Metrics.screenWidth/2
+  },
+  codeContainer: {
+
+  },
+  codeBtn: {
+    width: 85,
+    height: 43,
+    borderRadius: 50,
+    backgroundColor: '#00DD00',
+    borderColor: '#00DD00',
+    marginLeft: -10
+  },
+  codeFont: {
+    color: Colors.snow
+  },
+  codeBox: {
+    flexDirection: 'row'
   },
   forgetPassword: {
     justifyContent: 'center',
@@ -65,7 +94,7 @@ export default StyleSheet.create({
     borderColor: Metrics.mainBackgroundColor
   },
   othersLogin: {
-    paddingTop: 30
+    paddingTop: 20
   },
   othersFont: {
     fontSize: 17,
@@ -78,5 +107,8 @@ export default StyleSheet.create({
   iconStyle: {
     marginRight: 10,
     marginLeft: 10
+  },
+  formIconStyle: {
+    color: '#438DEF'
   }
 })
