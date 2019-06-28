@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import { ScrollView, Text, Image, View, StatusBar } from 'react-native'
 import { Button, InputItem, List, WhiteSpace } from '@ant-design/react-native';
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import { Alert, ToastAndroid } from 'react-native'
+import Feather from 'react-native-vector-icons/Feather';
 import styles from '../../Views/Login/Styles/LoginStyle'
 
 export default class PhoneLogin extends Component {
@@ -10,7 +11,9 @@ export default class PhoneLogin extends Component {
         this.state = {
             phone: '',
             checkCode: '',
-            passWord: ''
+            passWord: '',
+            getCoding: false,
+            count: 10
         }
     }
 
@@ -30,13 +33,39 @@ export default class PhoneLogin extends Component {
         }
     }
 
+    getAuthCode(){
+      if(this.state.getCoding) return
+      let reg = /^(\d){11}$/
+      // let reg = /^((1)3(\d){9}$)|(^(1)4[5-9](\d){8}$)|(^(1)5[^4]{9}$)|(^(1)66(\d){8}$)|(^(1)7[0-8](\d){8}$)|(^(1)8(\d){9}$)|(^(1)9[8-9](\d){8}$)/
+      if(!reg.test(this.state.phone)){
+        ToastAndroid.show('请输入有效的手机号码',ToastAndroid.SHORT)
+        return
+      }
+      this.setState({
+        getCoding: true 
+      },() => {
+        ToastAndroid.show('验证码已发送',ToastAndroid.SHORT)
+      })
+      let countTime = setInterval(() => {
+        if(this.state.count === 1) {
+          clearInterval(countTime)
+          this.setState({
+            getCoding: false
+          })
+        }
+        this.setState({
+          count: --this.state.count
+        })
+      },1000)
+    }
+
     render(){
         return (
             <View style={styles.registerBox}>
-          <InputItem value={this.state.userName} 
+          <InputItem type="number" value={this.state.phone} 
             onChange={value => {
               this.setState({
-                userName: value,
+                phone: value,
               });
             }}
             style={styles.inputStyle}
@@ -44,10 +73,10 @@ export default class PhoneLogin extends Component {
             placeholder="请输入手机号"
             last="true"
           >
-          <FontAwesome
+          <Feather
             style={styles.formIconStyle}
-            name={'mobile'}
-            size={30}
+            name={'smartphone'}
+            size={20}
           />
           </InputItem>
           <WhiteSpace size="lg" />
@@ -62,10 +91,10 @@ export default class PhoneLogin extends Component {
             placeholder="请输入密码"
             last="true"
           >
-           <FontAwesome
+           <Feather
             style={styles.formIconStyle}
             name={'lock'}
-            size={25}
+            size={20}
           />
           </InputItem>
           <WhiteSpace size="lg" /> 
@@ -74,7 +103,7 @@ export default class PhoneLogin extends Component {
               <InputItem value={this.state.checkCode} 
                 onChange={value => {
                   this.setState({
-                    passWord: value,
+                    checkCode: value,
                   });
                 }}
                 style={styles.inputStyle}
@@ -82,16 +111,20 @@ export default class PhoneLogin extends Component {
                 placeholder="请输入验证码"
                 last="true"
               >
-              <FontAwesome
+              <Feather
                 style={styles.formIconStyle}
-                name={'check-square'}
-                size={22}
+                name={'mail'}
+                size={20}
               />
               </InputItem>  
             </View> 
             <View style={styles.codeContainer}>
-              <Button style={styles.codeBtn}>
-                <Text style={styles.codeFont}>验证码</Text>
+              <Button onPress={()=>{this.getAuthCode()}} style={styles.codeBtn}>
+                {this.state.getCoding?(
+                  <Text style={styles.codeFont}>{this.state.count} s</Text>
+                ):(
+                  <Text style={styles.codeFont}>验证码</Text>
+                )}
               </Button>
             </View>
           </View>

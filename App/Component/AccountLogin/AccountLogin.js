@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { ScrollView, Text, Image, View, StatusBar } from 'react-native'
 import { Button, InputItem, List, WhiteSpace } from '@ant-design/react-native';
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import Feather from 'react-native-vector-icons/Feather';
 import styles from '../../Views/Login/Styles/LoginStyle'
 
 export default class AccountLogin extends Component {
@@ -39,10 +39,10 @@ export default class AccountLogin extends Component {
                     last="true"
                     labelNumber={1.5}
                 >
-                <FontAwesome
+                <Feather
                     style={styles.formIconStyle}
-                    name={'mobile'}
-                    size={30}
+                    name={'smartphone'}
+                    size={20}
                 />
                 </InputItem>
                 <WhiteSpace size="lg" />
@@ -53,10 +53,10 @@ export default class AccountLogin extends Component {
                     placeholder="请输入密码"
                     last="true"
                 >
-                <FontAwesome
+                <Feather
                     style={styles.formIconStyle}
                     name={'lock'}
-                    size={25}
+                    size={20}
                 />
                 </InputItem>
                 <WhiteSpace size="lg" /> 

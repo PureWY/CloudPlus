@@ -110,5 +110,13 @@ export default StyleSheet.create({
   },
   formIconStyle: {
     color: '#438DEF'
+  },
+  formIconStylePlus: {
+    color: '#438DEF',
+    marginLeft: -5
+  },
+  formIconStyleRe: {
+    color: '#438DEF',
+    marginLeft: -2
   }
 })

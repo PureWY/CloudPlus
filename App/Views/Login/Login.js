@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { ScrollView, Text, Image, View, StatusBar } from 'react-native'
 import { Button, InputItem, List, WhiteSpace } from '@ant-design/react-native';
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import { connect } from 'react-redux'
 import { loginRequest } from '../../Actions/LoginAction'
 
@@ -44,6 +44,8 @@ class Login extends Component {
   }
 
   checkLoginType(type){
+    console.log(type)
+    if(this.state.isRegister) return
     if(type === 'account' && this.state.isAccountLogin) return
     if(type === 'phone' && this.state.isPhoneLogin) return
     
@@ -63,8 +65,8 @@ class Login extends Component {
 
   backLogin(){
     this.setState({
-      isAccountLogin: true,
-      isPhoneLogin: false,
+      isAccountLogin: false,
+      isPhoneLogin: true,
       isRegister: false
     })
   }
@@ -93,12 +95,15 @@ class Login extends Component {
           </View>
 
           <View style={styles.loginContainer} >
-            <View style={styles.loginType}>
-              <Text onPress={()=>{this.checkLoginType('account')}} style={this.state.isAccountLogin?styles.subTitle:styles.noChoose}>账号密码登录</Text>
-              <Text style={styles.subTitle}>|</Text>
-              <Text onPress={()=>{this.checkLoginType('phone')}} style={!this.state.isAccountLogin?styles.subTitle:styles.noChoose}>手机号快捷登录</Text>
-            </View>
-            
+            {this.state.isRegister ? (<View style={styles.loginType}>
+              <Text style={styles.subTitle}>手机号快速注册</Text>
+            </View>) : (
+              <View style={styles.loginType}>
+                <Text onPress={()=>{this.checkLoginType('account')}} style={this.state.isAccountLogin?styles.subTitle:styles.noChoose}>账号密码登录</Text>
+                <Text style={styles.subTitle}>|</Text>
+                <Text onPress={()=>{this.checkLoginType('phone')}} style={!this.state.isAccountLogin?styles.subTitle:styles.noChoose}>手机号快捷登录</Text>
+              </View>
+            )}            
             {this.chooseCard()}
 
           <View style={styles.othersLogin}>
@@ -108,17 +113,17 @@ class Login extends Component {
               </View>
               <WhiteSpace size="lg" /> 
               <View style={styles.othersIcon}>
-                <FontAwesome
+                <FontAwesome5
                   style={styles.iconStyle}
                   name={'qq'}
-                  size={30}
+                  size={27}
                 />
-                <FontAwesome
+                <FontAwesome5
                   style={styles.iconStyle}
-                  name={'wechat'}
+                  name={'weixin'}
                   size={30}
                 />
-                <FontAwesome
+                <FontAwesome5
                   style={styles.iconStyle}
                   name={'weibo'}
                   size={30}
