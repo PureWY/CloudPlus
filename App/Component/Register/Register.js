@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
 import { ScrollView, Text, Image, View, StatusBar } from 'react-native'
 import { Button, InputItem, List, WhiteSpace } from '@ant-design/react-native';
-import { Alert, ToastAndroid } from 'react-native'
+import { ToastAndroid } from 'react-native'
 import Feather from 'react-native-vector-icons/Feather';
 import styles from '../../Views/Login/Styles/LoginStyle'
+import { toast, regInput } from '../../Utils/ToolFunc'
+import { phoneReg, numberReg, passReg } from '../../Utils/Regx'
 
 export default class PhoneLogin extends Component {
     constructor(props){
@@ -13,7 +15,8 @@ export default class PhoneLogin extends Component {
             checkCode: '',
             passWord: '',
             getCoding: false,
-            count: 10
+            count: 10,
+            randomCode: null
         }
     }
 
@@ -37,8 +40,8 @@ export default class PhoneLogin extends Component {
       if(this.state.getCoding) return
       let reg = /^(\d){11}$/
       // let reg = /^((1)3(\d){9}$)|(^(1)4[5-9](\d){8}$)|(^(1)5[^4]{9}$)|(^(1)66(\d){8}$)|(^(1)7[0-8](\d){8}$)|(^(1)8(\d){9}$)|(^(1)9[8-9](\d){8}$)/
-      if(!reg.test(this.state.phone)){
-        ToastAndroid.show('请输入有效的手机号码',ToastAndroid.SHORT)
+      let real = regInput(reg,this.state.phone,'请输入有效的手机号码')
+      if(!real){
         return
       }
       this.setState({
@@ -59,6 +62,19 @@ export default class PhoneLogin extends Component {
       },1000)
     }
 
+    toRegister(){
+      if(!phoneReg.test(this.state.phone)){
+        toast('请输入有效的手机号码')
+        return
+      }else if(!passReg.test(this.state.passWord)){
+        toast('请输入6到8位数字或字母格式的密码')
+        return
+      }
+
+
+      // this.props.doRegister()
+    }
+
     render(){
         return (
             <View style={styles.registerBox}>
@@ -68,6 +84,7 @@ export default class PhoneLogin extends Component {
                 phone: value,
               });
             }}
+            maxLength={11}
             style={styles.inputStyle}
             labelNumber={1.5}
             placeholder="请输入手机号"
@@ -86,6 +103,7 @@ export default class PhoneLogin extends Component {
                 passWord: value,
               });
             }}
+            maxLength={8}
             style={styles.inputStyle}
             labelNumber={1.5}
             placeholder="请输入密码"
@@ -106,6 +124,7 @@ export default class PhoneLogin extends Component {
                     checkCode: value,
                   });
                 }}
+                maxLength={4}
                 style={styles.inputStyle}
                 labelNumber={1.5}
                 placeholder="请输入验证码"
@@ -129,7 +148,7 @@ export default class PhoneLogin extends Component {
             </View>
           </View>
           <WhiteSpace size="lg" /> 
-          <Button type="primary" onPress={() => { this.props.doRegister() }} style={styles.loginBtn}>注册</Button>
+          <Button type="primary" onPress={() => { this.toRegister() }} style={styles.loginBtn}>注册</Button>
           <WhiteSpace size="lg" /> 
           <Button onPress={()=>{this.props.backLogin()}} style={styles.registerBtn}>
             <Text style={styles.mainColorFont}>返回登录</Text>
