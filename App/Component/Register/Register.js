@@ -20,22 +20,6 @@ export default class PhoneLogin extends Component {
         }
     }
 
-    onChange(val,type){
-        if(type == 'phone'){
-            this.setState({
-                phone: val
-            },()=>{
-                this.props.changeInfo(this.state.phone,this.state.checkCode)
-            })
-        }else{
-            this.setState({
-                checkCode: val
-            },()=>{
-                this.props.changeInfo(this.state.phone,this.state.checkCode)
-            })
-        }
-    }
-
     getAuthCode(){
       if(this.state.getCoding) return
       let reg = /^(\d){11}$/
@@ -48,6 +32,10 @@ export default class PhoneLogin extends Component {
         getCoding: true 
       },() => {
         ToastAndroid.show('验证码已发送',ToastAndroid.SHORT)
+        // this.randomCode = (Math.random() + '0').substring(2,8)
+        this.setState({
+          randomCode: '123123'
+        })
       })
       let countTime = setInterval(() => {
         if(this.state.count === 1) {
@@ -70,9 +58,12 @@ export default class PhoneLogin extends Component {
         toast('请输入6到8位数字或字母格式的密码')
         return
       }
+      if(this.state.checkCode != this.state.randomCode){
+        toast('验证码错误')
+        return
+      }
 
-
-      // this.props.doRegister()
+      this.props.doRegister(this.state.phone,this.state.passWord)
     }
 
     render(){
@@ -121,10 +112,10 @@ export default class PhoneLogin extends Component {
               <InputItem value={this.state.checkCode} 
                 onChange={value => {
                   this.setState({
-                    checkCode: value,
+                    checkCode: value
                   });
                 }}
-                maxLength={4}
+                maxLength={6}
                 style={styles.inputStyle}
                 labelNumber={1.5}
                 placeholder="请输入验证码"

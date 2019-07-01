@@ -8,15 +8,15 @@ export default class AccountLogin extends Component {
     constructor(props){
         super(props);
         this.state = {
-            userName: '',
+            phone: '',
             passWord: ''
         }
     }
 
     onChange(val,name){
-        if(name == 'userName'){
+        if(name == 'phone'){
             this.setState({
-                userName: val
+                phone: val
             },()=>{
                 this.props.changeInfo(this.state)
             })
@@ -32,11 +32,12 @@ export default class AccountLogin extends Component {
     render(){
         return (
             <View style={styles.loginBox}>
-                <InputItem value={this.state.userName} 
-                    onChange={(val) => {this.onChange(val,'userName')}}
+                <InputItem value={this.state.phone} 
+                    onChange={(val) => {this.onChange(val,'phone')}}
                     style={styles.inputStyle}
                     placeholder="请输入账号"
                     last="true"
+                    maxLength={11}
                     labelNumber={1.5}
                 >
                 <Feather
@@ -51,6 +52,7 @@ export default class AccountLogin extends Component {
                     labelNumber={1.5}
                     style={styles.inputStyle}
                     placeholder="请输入密码"
+                    maxLength={8}
                     last="true"
                 >
                 <Feather

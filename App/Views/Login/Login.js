@@ -4,6 +4,7 @@ import { Button, InputItem, List, WhiteSpace } from '@ant-design/react-native';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import { connect } from 'react-redux'
 import { loginRequest } from '../../Actions/LoginAction'
+import { registerRequest } from '../../Actions/RegisterAction'
 
 import AccountLogin from '../../Component/AccountLogin/AccountLogin'
 import PhoneLogin from '../../Component/PhoneLogin/PhoneLogin'
@@ -27,13 +28,16 @@ class Login extends Component {
 
   login() {
     this.props.loginRequest({
-        userName: this.state.userName,
-        passWord: this.state.passWord
+      phone: this.state.phone,
+      passWord: this.state.passWord
     })
   }
 
-  handleRegister(){
-    console.log("开始注册")
+  handleRegister(phone,passWord){
+    this.props.registerRequest({
+      phone: phone,
+      passWord: passWord
+    })
   }
 
   insertForm(val){
@@ -75,7 +79,7 @@ class Login extends Component {
     if(this.state.isAccountLogin){
       return (<AccountLogin toLogin={()=>{this.login()}} toRegister={()=>{this.toRegister()}} changeInfo={(val)=>{this.insertForm(val)}}/>)
     }else if(this.state.isRegister){
-      return (<Register backLogin={()=>{this.backLogin()}} doRegister={()=>{this.handleRegister()}} />)
+      return (<Register backLogin={()=>{this.backLogin()}} doRegister={(phone,passWord)=>{this.handleRegister(phone,passWord)}} />)
     }else{
       return (<PhoneLogin toLogin={()=>{this.login()}} toRegister={()=>{this.toRegister()}} changeInfo={(val)=>{this.insertForm(val)}}/>)
     }
@@ -139,7 +143,8 @@ class Login extends Component {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-      loginRequest: (userName, passWord) => dispatch(loginRequest(userName, passWord))
+      loginRequest: (userName, passWord) => dispatch(loginRequest(userName, passWord)),
+      registerRequest: (phone, passWord) => dispatch(registerRequest(phone,passWord))
   }
 }
 
