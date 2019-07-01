@@ -13,7 +13,7 @@ export function * login (api, action) {
             passWord: passWord
         });
         if(res.data.code == '200'){
-            yield put(loginSuccess(res.data.body));
+            yield put(loginSuccess(res.data));
             yield put(NavigationActions.navigate({routeName: 'Home'}));
         }else{
             ToastAndroid.show(res.data.message,ToastAndroid.SHORT)
