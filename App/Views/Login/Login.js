@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { ScrollView, Text, Image, View, StatusBar } from 'react-native'
 import { Button, InputItem, List, WhiteSpace } from '@ant-design/react-native';
+import SplashScreen from 'react-native-splash-screen'
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import { connect } from 'react-redux'
 import { loginRequest } from '../../Actions/LoginAction'
@@ -24,6 +25,10 @@ class Login extends Component {
     };
 
     this.checkLoginType = this.checkLoginType.bind(this)
+  }
+
+  componentDidMount() {
+    SplashScreen.hide();
   }
 
   login() {
