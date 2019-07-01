@@ -24,7 +24,7 @@ const TabNav = createBottomTabNavigator({
     User: {
         screen: User,
         navigationOptions: {
-            tabBarLabel: '个人中心'
+            tabBarLabel: '我的'
         }
     }
 }, {

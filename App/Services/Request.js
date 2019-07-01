@@ -28,12 +28,11 @@ service.interceptors.response.use(
   response => {
     if (response.data.code == 200) {
         return response
-    } else if (response.data.code == -9004) {
+    } else if (response.data.code == -9001) {
         requestInfo.token = null
         console.log('token过期')
-
+        
         // TODO 跳转至登录页
-
         return response
     } else {
       return response

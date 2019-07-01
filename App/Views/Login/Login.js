@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { ScrollView, Text, Image, View, StatusBar } from 'react-native'
 import { Button, InputItem, List, WhiteSpace } from '@ant-design/react-native';
+import SplashScreen from 'react-native-splash-screen'
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import { connect } from 'react-redux'
 import { loginRequest } from '../../Actions/LoginAction'
@@ -26,6 +27,22 @@ class Login extends Component {
     this.checkLoginType = this.checkLoginType.bind(this)
   }
 
+  componentDidMount() {
+    storage.load({
+      key: 'loginDemo',
+      autoSync: true,
+      syncInBackground: true,
+    }).then(res => {
+      console.log(res)
+      if(res.isLogin){
+        this.props.navigation.navigate('Home')
+      }
+    }).catch(err => {
+      console.log(err)
+    }) 
+    SplashScreen.hide();
+  }
+
   login() {
     this.props.loginRequest({
       phone: this.state.phone,
@@ -48,7 +65,6 @@ class Login extends Component {
   }
 
   checkLoginType(type){
-    console.log(type)
     if(this.state.isRegister) return
     if(type === 'account' && this.state.isAccountLogin) return
     if(type === 'phone' && this.state.isPhoneLogin) return
