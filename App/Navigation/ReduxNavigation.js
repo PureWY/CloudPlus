@@ -16,7 +16,6 @@ class ReduxNavigation extends React.Component {
       if (Platform.OS === 'ios') return
       BackHandler.addEventListener('hardwareBackPress', () => {
         const { dispatch, nav } = this.props
-        console.log(nav.routes);
   
         if (nav.routes.length === 2 && nav.routes[1].routes[0].routeName === 'Home') {
           if (this.lastBackPressed && this.lastBackPressed + 2000 >= Date.now()) {

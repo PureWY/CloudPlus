@@ -28,6 +28,18 @@ class Login extends Component {
   }
 
   componentDidMount() {
+    storage.load({
+      key: 'loginDemo',
+      autoSync: true,
+      syncInBackground: true,
+    }).then(res => {
+      console.log(res)
+      if(res.isLogin){
+        this.props.navigation.navigate('Home')
+      }
+    }).catch(err => {
+      console.log(err)
+    }) 
     SplashScreen.hide();
   }
 
@@ -53,7 +65,6 @@ class Login extends Component {
   }
 
   checkLoginType(type){
-    console.log(type)
     if(this.state.isRegister) return
     if(type === 'account' && this.state.isAccountLogin) return
     if(type === 'phone' && this.state.isPhoneLogin) return

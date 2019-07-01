@@ -15,6 +15,13 @@ export function * login (api, action) {
         if(res.data.code == '200'){
             yield put(loginSuccess(res.data));
             yield put(NavigationActions.navigate({routeName: 'Home'}));
+            storage.save({
+                key: 'loginDemo',
+                data: {
+                    isLogin: true
+                },
+                expires: null
+            });
         }else{
             ToastAndroid.show(res.data.message,ToastAndroid.SHORT)
             yield put(loginFailure());
