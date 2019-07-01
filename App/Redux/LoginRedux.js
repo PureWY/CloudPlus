@@ -2,7 +2,6 @@ import { handleActions } from 'redux-actions';
 import * as actionType from '../Actions/Type';
 
 const initialState = {
-  userName: null,
   phone: null,
   fetching: false,
   error: null,
@@ -11,7 +10,7 @@ const initialState = {
 
 const loginReducer = handleActions({
     [actionType.LOGIN_REQUEST]: (state, action) => ({
-        userName: action.payload.userName,
+        phone: action.payload.phone,
         fetching: true,
         error: null,
         token: null

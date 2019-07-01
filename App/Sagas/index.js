@@ -1,26 +1,20 @@
 import { takeLatest, all } from 'redux-saga/effects'
 import LoginApiCreate from '../Services/LoginApi'
-
-/* ------------- Types ------------- */
+import RegisterApiCreate from '../Services/RegisterApi'
 
 import * as ActionType from '../Actions/Type'
 
-/* ------------- Sagas ------------- */
-
 import { login } from './LoginSaga'
+import { register } from './RegisterSaga'
 
-/* ------------- API ------------- */
-
-// The API we use is only used from Sagas, so we create it here and pass along
-// to the sagas which need it.
-// const api = DebugConfig.useFixtures ? FixtureAPI : API.create()
 const loginApi = LoginApiCreate.create();
-
-/* ------------- Connect Types To Sagas ------------- */
+const registerApi = RegisterApiCreate.create();
 
 export default function * root () {
   yield all([
-    // some sagas only receive an action
     takeLatest(ActionType.LOGIN_REQUEST, login, loginApi)
+  ])
+  yield all([
+    takeLatest(ActionType.REGISTER_REQUEST, register, registerApi)
   ])
 }

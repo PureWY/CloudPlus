@@ -3,10 +3,12 @@ import configureStore from './CreateStore'
 import rootSaga from '../Sagas'
 
 import LoginRedux from './LoginRedux'
+import RegisterRedux from './RegisterRedux'
 
 export const reducers = combineReducers({
     nav: require('./NavigationRedux').reducer,
-    login: LoginRedux
+    login: LoginRedux,
+    register: RegisterRedux
 })
 
 export default () => {

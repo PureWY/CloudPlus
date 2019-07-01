@@ -2,7 +2,6 @@ const express = require('express');
 const session = require('express-session');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const connection = require('./Config/MySQL');
 
 // 配置路由
 const routes = require('./Routes')
@@ -17,8 +16,6 @@ app.use(cors());
 
 // 设置端口
 app.set('port',process.env.PORT || 3031);
-
-connection.connect()
 
 // 解析url
 app.use(bodyParser.json());
