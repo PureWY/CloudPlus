@@ -62,6 +62,11 @@ const ApplicationStyles = {
     optionIcon: {
       width: 20,
       color: '#777'
+    },
+    insulateView: {
+      height: 20,
+      width: Metrics.screenWidth,
+      backgroundColor: Colors.grey
     }
   },
   darkLabelContainer: {
