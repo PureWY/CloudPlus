@@ -26,7 +26,7 @@ class Message extends Component {
       <View style={styles.mainContainer}>
         <StatusBar
           barStyle="light-content"
-          backgroundColor="#5175F0"
+          backgroundColor="#3C83E9"
         />
         
         <Text>消息页面</Text>

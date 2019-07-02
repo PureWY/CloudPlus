@@ -106,7 +106,7 @@ class Login extends Component {
       <View style={styles.mainContainer}>
         <StatusBar
           barStyle="light-content"
-          backgroundColor="#5175F0"
+          backgroundColor="#3C83E9"
         />
         {/* <Image source={Images.cloudMain} style={[styles.backgroundImage,styles.launchBackground]} resizeMode='stretch' /> */}
         <ScrollView style={styles.container}>

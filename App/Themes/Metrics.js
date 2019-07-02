@@ -14,7 +14,7 @@ const metrics = {
   smallMargin: 5,
   doubleSection: 50,
   horizontalLineHeight: 1,
-  mainBackgroundColor: '#5175F0',
+  mainBackgroundColor: '#3C83E9',
   marginTopCenter: -100,
   marginTopUp: 25,
   borderRadius: 10,
