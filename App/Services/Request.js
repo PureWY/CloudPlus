@@ -2,7 +2,7 @@ import axios from 'axios'
 
 // TODO 改为配置项
 const baseUrl = 'http://192.168.43.10:3031'
-// const baseUrl = 'http://192.168.0.2:3031'
+// const baseUrl = 'http://192.168.0.11:3031'
 
 const service = axios.create({
     baseURL: baseUrl,

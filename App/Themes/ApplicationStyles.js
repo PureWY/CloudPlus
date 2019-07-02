@@ -58,6 +58,10 @@ const ApplicationStyles = {
     },
     greyColorFont: {
       color: '#ECECEC'
+    },
+    optionIcon: {
+      width: 20,
+      color: '#777'
     }
   },
   darkLabelContainer: {
