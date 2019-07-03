@@ -37,30 +37,6 @@ class Message extends Component {
         message: '怎么还没有开发完',
         time: '14:33',
         headerImg: '../../Images/header.jpg'
-      },
-      {
-        id: '1',
-        name: '青姐',
-        message: '任务已经给你安排过了,这次不能有半点闪失，一定要按质按量的完成，我相信你的能力',
-        time: '12:09'
-      },{
-        id: '2',
-        name: '佳佳',
-        message: '我待会回家了',
-        time: '11:08',
-        headerImg: '../../Images/header.jpg'
-      },{
-        id: '3',
-        name: '孙玉竹',
-        message: '事情太多了吧',
-        time: '09:54',
-        headerImg: '../../Images/header.jpg'
-      },{
-        id: '4',
-        name: '李开祖',
-        message: '怎么还没有开发完',
-        time: '14:33',
-        headerImg: '../../Images/header.jpg'
       }
     ]
     };
@@ -91,8 +67,6 @@ class Message extends Component {
     return (
       <View style={styles.mainContainer}>
         <StatusBar
-          barStyle="light-content"
-          backgroundColor="#3C83E9"
         />
         
         <View style={styles.c_messageHeader}>

@@ -26,10 +26,7 @@ class User extends Component {
     return (
       <View style={styles.mainContainer}>
         <StatusBar
-          barStyle="light-content"
-          backgroundColor="#3C83E9"
         />
-
         <View style={styles.headerContainer}>
           <View style={styles.headerContent}>
             <View>
