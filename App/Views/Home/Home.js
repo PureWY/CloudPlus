@@ -29,6 +29,7 @@ class Home extends Component {
         />
         <View style={styles.c_homeContainer}>
           <Image
+          resizeMode="stretch"
           source={require('../../Images/home.png')}
           style={styles.b_homeImg}
           />
