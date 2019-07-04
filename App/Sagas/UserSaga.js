@@ -1,22 +1,22 @@
 import { put, select, call } from 'redux-saga/effects'
 import { Toast } from '@ant-design/react-native';
-import { registerSuccess, registerFailure } from '../Actions/RegisterAction'
-import { NavigationActions } from 'react-navigation'
+import { userInfoSuccess, userInfoFailure } from '../Actions/UserAction'
 
-export function * register (api, action) {
-    const {phone, passWord} = action.payload;
+export function * user (api, action) {
+    const {phone} = action.payload;
     let res = null
     try {
-        res = yield call(api.registerRequest, {
-            phone: phone,
-            passWord: passWord
+        res = yield call(api.userInfoRequest, {
+            phone: phone
         });
         if(res.data.code == '200'){
-            yield put(registerSuccess());
+            console.log("查询个人信息")
+            console.log(res.data.body)
+            // yield put(userInfoSuccess(res.data.body));
             Toast.success(res.data.message)
         }else{
             Toast.fail(res.data.message)
-            yield put(registerFailure());
+            yield put(userInfoFailure());
         }
     }catch(ex){
         Toast.offline('登录失败，请检查网络设置')

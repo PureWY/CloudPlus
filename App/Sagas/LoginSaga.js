@@ -19,7 +19,7 @@ export function * login (api, action) {
             storage.save({
                 key: 'loginDemo',
                 data: {
-                    isLogin: true
+                    userToken: res.data.token
                 },
                 expires: null
             });

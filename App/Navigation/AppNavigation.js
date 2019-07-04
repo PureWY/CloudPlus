@@ -1,6 +1,7 @@
 import React from 'react';
 import { createStackNavigator, createBottomTabNavigator, createAppContainer } from 'react-navigation';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import AuthLoading from '../Views/AuthLoading/AuthLoading'
 import Login from '../Views/Login/Login';
 import Home from '../Views/Home/Home';
 import User from '../Views/User/User';
@@ -56,6 +57,9 @@ const TabNav = createBottomTabNavigator({
 })
 
 const PrimaryNav = createStackNavigator({
+    AuthLoading: {
+        screen: AuthLoading
+    },
     TabBar: {
         screen: TabNav
     },
@@ -64,7 +68,7 @@ const PrimaryNav = createStackNavigator({
     }
 },{
     headerMode: 'none',
-    initialRouteName: 'Login',
+    initialRouteName: 'AuthLoading',
     navigationOptions: {
         headerStyle: styles.header
     }

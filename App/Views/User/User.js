@@ -4,6 +4,7 @@ import { Button, InputItem, List, WhiteSpace, Modal } from '@ant-design/react-na
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import { connect } from 'react-redux'
 import { logoutRequest } from '../../Actions/LoginAction'
+import { userInfoRequest } from '../../Actions/UserAction'
 
 // Styles
 import styles from './Styles/UserStyle'
@@ -19,7 +20,13 @@ class User extends Component {
   }
 
   componentDidMount(){
-    console.log(this.props)
+    this.getUserInfo()
+  }
+
+  getUserInfo(){
+    this.props.userInfoRequest({
+      phone: this.props.state.phone
+    })
   }
 
   onClose(){
@@ -30,7 +37,7 @@ class User extends Component {
 
   handleLogout(){
     this.setState({
-      visible: false,
+      visible: false
     },()=>{
       this.props.logoutRequest()
       // 清除登录状态
@@ -61,8 +68,8 @@ class User extends Component {
             />
             </View>
             <View style={styles.headerName}>
-              <Text style={styles.userName}>天青色等烟雨</Text>
-              <Text style={styles.userSign}>你犹如传世的青花瓷那般飘逸</Text>
+              <Text style={styles.userName}>{this.props.state.user_name}</Text>
+              <Text style={styles.userSign}>{this.props.state.user_sign}</Text>
             </View>
           </View>
         </View>
@@ -133,13 +140,14 @@ class User extends Component {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-      logoutRequest: () => dispatch(logoutRequest())
+      logoutRequest: () => dispatch(logoutRequest()),
+      userInfoRequest: (phone) => dispatch(userInfoRequest(phone))
   }
 }
 
 const mapStateToProps = (state) => {
   return {
-      state: state.login
+      state: state.user
   }
 }
 

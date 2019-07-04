@@ -4,11 +4,13 @@ import rootSaga from '../Sagas'
 
 import LoginRedux from './LoginRedux'
 import RegisterRedux from './RegisterRedux'
+import UserRedux from './UserRedux'
 
 export const reducers = combineReducers({
     nav: require('./NavigationRedux').reducer,
     login: LoginRedux,
-    register: RegisterRedux
+    register: RegisterRedux,
+    user: UserRedux
 })
 
 export default () => {
