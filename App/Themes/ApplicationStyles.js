@@ -11,6 +11,10 @@ const ApplicationStyles = {
       flex: 1,
       backgroundColor: Colors.transparent
     },
+    mainHeader: {
+      height: 24,
+      backgroundColor: Metrics.mainBackgroundColor
+    },
     backgroundImage: {
       position: 'absolute',
       top: 0,

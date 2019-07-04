@@ -26,10 +26,14 @@ class Home extends Component {
       <View style={styles.mainContainer}>
         <StatusBar
           barStyle="light-content"
-          backgroundColor="#3C83E9"
         />
-        
-        <Text>欢迎用户:{this.props.state.phone}</Text>
+        <View style={styles.c_homeContainer}>
+          <Image
+          resizeMode="stretch"
+          source={require('../../Images/home.png')}
+          style={styles.b_homeImg}
+          />
+        </View>
       </View>
     )
   }
