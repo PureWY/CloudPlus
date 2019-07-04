@@ -25,7 +25,12 @@ const loginReducer = handleActions({
         ...state,
         error: '登录失败',
         fetching: false,
-    })
+    }),
+    [actionType.LOGOUT_REQUEST]: (state, action) =>({
+        ...state,
+        phone: null,
+        token: null
+    }),
 }, initialState)
 
 export default loginReducer;

@@ -3,7 +3,7 @@ import { ScrollView, Text, Image, View, StatusBar } from 'react-native'
 import { Button, InputItem, List, WhiteSpace } from '@ant-design/react-native';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import { connect } from 'react-redux'
-import { loginRequest } from '../../Actions/LoginAction'
+import { logoutRequest } from '../../Actions/LoginAction'
 
 // Styles
 import styles from './Styles/UserStyle'
@@ -19,6 +19,15 @@ class User extends Component {
 
   componentDidMount(){
     console.log(this.props)
+  }
+
+  handleLogout(){
+    this.props.logoutRequest()
+    // remove a single record
+    storage.remove({
+      key: 'loginDemo'
+    });
+    this.props.navigation.navigate('Login')
   }
 
   render () {
@@ -85,6 +94,7 @@ class User extends Component {
           </List>
           <View style={styles.c_logoutBtn}>
             <Button
+            onPress={()=>{this.handleLogout()}}
             type="warning"
             >退出登录</Button>
           </View>
@@ -96,7 +106,7 @@ class User extends Component {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-      // loginRequest: (userName, passWord) => dispatch(loginRequest(userName, passWord))
+      logoutRequest: () => dispatch(logoutRequest())
   }
 }
 
