@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import { ScrollView, Text, Image, View, StatusBar } from 'react-native'
-import { Button, InputItem, List, WhiteSpace } from '@ant-design/react-native';
+import { Button, InputItem, List, WhiteSpace, Modal } from '@ant-design/react-native';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import { connect } from 'react-redux'
-import { loginRequest } from '../../Actions/LoginAction'
+import { logoutRequest } from '../../Actions/LoginAction'
 
 // Styles
 import styles from './Styles/UserStyle'
@@ -13,7 +13,8 @@ class User extends Component {
     super(props);
     this.state = {
       userName: '',
-      passWord: ''
+      passWord: '',
+      visible: false,
     };
   }
 
@@ -21,8 +22,32 @@ class User extends Component {
     console.log(this.props)
   }
 
+  onClose(){
+    this.setState({
+      visible: false,
+    });
+  };
+
+  handleLogout(){
+    this.setState({
+      visible: false,
+    },()=>{
+      this.props.logoutRequest()
+      // 清除登录状态
+      storage.remove({
+        key: 'loginDemo'
+      });
+      this.props.navigation.navigate('Login')
+    });
+  }
+
   render () {
     const Item = List.Item;
+    const footerButtons = [
+      { text: '取消', onPress: () => {this.onClose()} },
+      { text: '确定', onPress: () => {this.handleLogout()} },
+    ];
+
     return (
       <View style={styles.mainContainer}>
         <StatusBar
@@ -85,9 +110,21 @@ class User extends Component {
           </List>
           <View style={styles.c_logoutBtn}>
             <Button
+            onPress={() => this.setState({ visible: true })}
             type="warning"
             >退出登录</Button>
           </View>
+          <Modal
+            title="提示"
+            transparent
+            maskClosable
+            visible={this.state.visible}
+            footer={footerButtons}
+          >
+            <View style={{ paddingVertical: 20 }}>
+              <Text style={{ textAlign: 'center' }}>是否确定退出登录？</Text>
+            </View>
+        </Modal>
         </View>
       </View>
     )
@@ -96,7 +133,7 @@ class User extends Component {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-      // loginRequest: (userName, passWord) => dispatch(loginRequest(userName, passWord))
+      logoutRequest: () => dispatch(logoutRequest())
   }
 }
 

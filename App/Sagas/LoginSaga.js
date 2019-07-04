@@ -1,5 +1,6 @@
 import { put, select, call } from 'redux-saga/effects'
 import { Alert, ToastAndroid } from 'react-native'
+import { Toast } from '@ant-design/react-native';
 import { loginSuccess, loginFailure } from '../Actions/LoginAction'
 import { NavigationActions } from 'react-navigation'
 
@@ -23,11 +24,11 @@ export function * login (api, action) {
                 expires: null
             });
         }else{
-            ToastAndroid.show(res.data.message,ToastAndroid.SHORT)
+            Toast.fail(res.data.message)
             yield put(loginFailure());
         }
     }catch(ex){
-        ToastAndroid.show('登录失败，请检查网络设置',ToastAndroid.SHORT)
+        Toast.offline('登录失败，请检查网络设置')
         yield put(loginFailure());
     }
 }

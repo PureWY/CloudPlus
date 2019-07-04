@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import { ScrollView, Text, Image, View, StatusBar } from 'react-native'
 import { Button, InputItem, List, WhiteSpace } from '@ant-design/react-native';
-import { ToastAndroid } from 'react-native'
+import { Toast } from '@ant-design/react-native';
 import Feather from 'react-native-vector-icons/Feather';
 import styles from '../../Views/Login/Styles/LoginStyle'
-import { toast, regInput } from '../../Utils/ToolFunc'
+import { regInput } from '../../Utils/ToolFunc'
 import { phoneReg, numberReg, passReg } from '../../Utils/Regx'
 
 export default class PhoneLogin extends Component {
@@ -31,7 +31,7 @@ export default class PhoneLogin extends Component {
       this.setState({
         getCoding: true 
       },() => {
-        ToastAndroid.show('验证码已发送',ToastAndroid.SHORT)
+        Toast.success('验证码已发送')
         // this.randomCode = (Math.random() + '0').substring(2,8)
         this.setState({
           randomCode: '123123'
@@ -52,14 +52,14 @@ export default class PhoneLogin extends Component {
 
     toRegister(){
       if(!phoneReg.test(this.state.phone)){
-        toast('请输入有效的手机号码')
+        Toast.fail('请输入有效的手机号码')
         return
       }else if(!passReg.test(this.state.passWord)){
-        toast('请输入6到8位数字或字母格式的密码')
+        Toast.fail('请输入6到8位数字或字母格式的密码')
         return
       }
       if(this.state.checkCode != this.state.randomCode){
-        toast('验证码错误')
+        Toast.fail('验证码错误')
         return
       }
 
