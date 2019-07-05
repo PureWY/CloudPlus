@@ -17,9 +17,8 @@ const loginReducer = handleActions({
     }),
     [actionType.LOGIN_SUCCESS]: (state, action) =>({
         ...state,
-        ...action.payload.body,
         fetching: false,
-        token: action.payload.token
+        ...action.payload
     }),
     [actionType.LOGIN_FAILURE]: (state, action) => ({
         ...state,

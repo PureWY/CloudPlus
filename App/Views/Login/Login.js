@@ -28,18 +28,6 @@ class Login extends Component {
   }
 
   componentDidMount() {
-    storage.load({
-      key: 'loginDemo',
-      autoSync: true,
-      syncInBackground: true,
-    }).then(res => {
-      console.log(res)
-      if(res.isLogin){
-        this.props.navigation.navigate('Home')
-      }
-    }).catch(err => {
-      console.log(err)
-    }) 
     SplashScreen.hide();
   }
 

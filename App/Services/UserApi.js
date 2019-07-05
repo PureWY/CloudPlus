@@ -2,15 +2,15 @@ import request from './Request';
 
 const create = () => {
 
-  const registerRequest = (data) => {
+  const userInfoRequest = (data) => {
     return request.post(
-      '/register',
+      '/userInfo',
       data
     )
   }
 
   return {
-    registerRequest
+    userInfoRequest
   }
 }
 
