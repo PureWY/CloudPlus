@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux'
 import { loginSuccess } from '../../Actions/LoginAction'
+import SplashScreen from 'react-native-splash-screen'
 import {
   ActivityIndicator,
   StatusBar,
@@ -22,8 +23,9 @@ class AuthLoadingScreen extends React.Component {
     }).then(res => {
       console.log(res)
       if(res.userToken){
-        this.props.loginSuccess({token: res.userToken})
-        this.props.navigation.navigate(userToken ? 'Home' : 'Login');
+        this.props.loginSuccess({token: res.userToken,phone: res.phone})
+        SplashScreen.hide()
+        this.props.navigation.navigate(res.userToken ? 'Home' : 'Login');
       }
     }).catch(err => {
       this.props.navigation.navigate('Login')
@@ -41,7 +43,7 @@ class AuthLoadingScreen extends React.Component {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-      loginSuccess: () => dispatch(loginSuccess())
+      loginSuccess: (token,phone) => dispatch(loginSuccess(token,phone))
   }
 }
 

@@ -19,7 +19,8 @@ export function * login (api, action) {
             storage.save({
                 key: 'loginDemo',
                 data: {
-                    userToken: res.data.token
+                    userToken: res.data.token,
+                    phone: phone
                 },
                 expires: null
             });

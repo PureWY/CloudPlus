@@ -20,6 +20,7 @@ class User extends Component {
   }
 
   componentDidMount(){
+    console.log(this.props.state)
     this.getUserInfo()
   }
 
@@ -147,7 +148,7 @@ const mapDispatchToProps = (dispatch) => {
 
 const mapStateToProps = (state) => {
   return {
-      state: state.user
+      state: state.login
   }
 }
 

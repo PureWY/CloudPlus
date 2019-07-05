@@ -12,14 +12,14 @@ export function * user (api, action) {
         if(res.data.code == '200'){
             console.log("查询个人信息")
             console.log(res.data.body)
-            // yield put(userInfoSuccess(res.data.body));
+            yield put(userInfoSuccess(res.data.body));
             Toast.success(res.data.message)
         }else{
             Toast.fail(res.data.message)
             yield put(userInfoFailure());
         }
     }catch(ex){
-        Toast.offline('登录失败，请检查网络设置')
-        yield put(registerFailure());
+        Toast.offline('获取用户信息失败')
+        yield put(userInfoFailure());
     }
 }
