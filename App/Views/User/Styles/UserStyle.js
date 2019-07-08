@@ -33,11 +33,6 @@ export default StyleSheet.create({
     color: Colors.snow,
     fontSize: Fonts.size.medium
   },
-  b_optionFont: {
-    marginLeft: Metrics.baseMargin,
-    color: '#666',
-    fontSize: Fonts.size.regular
-  },
   c_logoutBtn: {
     padding: Metrics.basePadding
   }

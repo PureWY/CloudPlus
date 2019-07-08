@@ -71,7 +71,12 @@ const ApplicationStyles = {
       height: 20,
       width: Metrics.screenWidth,
       backgroundColor: Colors.grey
-    }
+    },
+    b_optionFont: {
+      marginLeft: Metrics.baseMargin,
+      color: '#666',
+      fontSize: Fonts.size.regular
+    },
   },
   darkLabelContainer: {
     padding: Metrics.smallMargin,

@@ -65,7 +65,7 @@ export default StyleSheet.create({
 
   },
   codeBtn: {
-    width: 85,
+    width: 90,
     height: 43,
     borderRadius: 50,
     backgroundColor: '#00DD00',
