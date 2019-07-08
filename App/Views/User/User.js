@@ -50,6 +50,7 @@ class User extends Component {
   }
 
   render () {
+    const state = this.props.state
     const Item = List.Item;
     const footerButtons = [
       { text: '取消', onPress: () => {this.onClose()} },
@@ -69,8 +70,8 @@ class User extends Component {
             />
             </View>
             <View style={styles.headerName}>
-              <Text style={styles.userName}>{this.props.state.user_name}</Text>
-              <Text style={styles.userSign}>{this.props.state.user_sign}</Text>
+              <Text style={styles.userName}>{state.user_name?state.user_name:state.phone}</Text>
+              <Text style={styles.userSign}>{state.user_sign?state.user_sign:'设置一个签名吧'}</Text>
             </View>
           </View>
         </View>
@@ -100,7 +101,7 @@ class User extends Component {
             thumb={
               <FontAwesome5 
               style={styles.optionIcon}
-              name={'cog'}
+              name={'mail-bulk'}
               size={20}
               />
             }
@@ -113,7 +114,29 @@ class User extends Component {
             }
             arrow="empty"
           >
-          <Text style={styles.b_optionFont}>个人中心</Text>
+          <Text style={styles.b_optionFont}>意见反馈</Text>
+          </Item>
+          <Item
+            thumb={
+              <FontAwesome5 
+              style={styles.optionIcon}
+              name={'cog'}
+              size={20}
+              />
+            }
+            extra={
+              <FontAwesome5 
+              style={styles.optionIcon}
+              name={'chevron-right'}
+              size={20}
+              />
+            }
+            arrow="empty"
+            onPress={()=>{
+              this.props.navigation.navigate('Setting')
+            }}
+          >
+          <Text style={styles.b_optionFont}>设置</Text>
           </Item>
           </List>
           <View style={styles.c_logoutBtn}>

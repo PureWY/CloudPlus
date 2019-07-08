@@ -6,6 +6,8 @@ import Login from '../Views/Login/Login';
 import Home from '../Views/Home/Home';
 import User from '../Views/User/User';
 import Message from '../Views/Message/Message';
+import Setting from '../Views/Setting/Setting'
+import UserInfo from '../Views/UserInfo/UserInfo'
 
 import styles from './Styles/NavigationStyles';
 
@@ -58,17 +60,43 @@ const TabNav = createBottomTabNavigator({
 
 const PrimaryNav = createStackNavigator({
     AuthLoading: {
-        screen: AuthLoading
+        screen: AuthLoading,
+        navigationOptions: {
+            header: null
+        }
     },
     TabBar: {
-        screen: TabNav
+        screen: TabNav,
+        navigationOptions: {
+            header: null
+        }
     },
     Login: {
-        screen: Login
+        screen: Login,
+        navigationOptions: {
+            header: null
+        }
+    },
+    Setting: {
+        screen: Setting,
+        navigationOptions: {
+            title: '设置'
+        }
+    },
+    UserInfo: {
+        screen: UserInfo,
+        navigationOptions: {
+            title: '基本信息'
+        }
     }
 },{
-    headerMode: 'none',
     initialRouteName: 'AuthLoading',
+    defaultNavigationOptions: {
+        headerTintColor: '#000',
+        headerStyle: {
+            backgroundColor: '#fff',
+        },
+    },
     navigationOptions: {
         headerStyle: styles.header
     }

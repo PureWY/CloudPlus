@@ -13,7 +13,6 @@ export function * user (api, action) {
             console.log("查询个人信息")
             console.log(res.data.body)
             yield put(userInfoSuccess(res.data.body));
-            Toast.success(res.data.message)
         }else{
             Toast.fail(res.data.message)
             yield put(userInfoFailure());
