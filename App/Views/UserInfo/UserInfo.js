@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { ScrollView, Text, Image, TextInput, View, StatusBar } from 'react-native'
 import { Button, InputItem, List, WhiteSpace } from '@ant-design/react-native';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import { connect } from 'react-redux'
 import { userInfoRequest, userInfoUpdate } from '../../Actions/UserAction'
@@ -84,6 +85,7 @@ class UserInfo extends Component {
         <StatusBar
           barStyle="light-content"
         />
+        <KeyboardAwareScrollView>
         <View>
           <List renderHeader={'账号信息'}>
             <Item
@@ -207,6 +209,7 @@ class UserInfo extends Component {
             </Item>
           </List>
         </View>
+        </KeyboardAwareScrollView>
       </View>
     )
   }
