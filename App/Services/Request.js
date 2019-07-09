@@ -2,8 +2,8 @@ import axios from 'axios'
 import { NavigationActions } from 'react-navigation'
 
 // TODO 改为配置项
-// const baseUrl = 'http://192.168.43.10:3031'
-const baseUrl = 'http://10.73.220.213:3031'
+const baseUrl = 'http://192.168.43.10:3031'
+// const baseUrl = 'http://10.73.220.213:3031'
 
 const service = axios.create({
     baseURL: baseUrl,
