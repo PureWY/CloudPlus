@@ -22,3 +22,23 @@ export function * user (api, action) {
         yield put(userInfoFailure());
     }
 }
+
+export function * userInfoUpdate (api, action) {
+    console.log('传入的')
+    console.log(action.payload)
+    let res = null
+    try {
+        res = yield call(api.userInfoUpdate, {
+            ...action.payload
+        });
+        if(res.data.code == '200'){
+            yield put(userInfoSuccess(action.payload));
+        }else{
+            Toast.fail(res.data.message)
+            yield put(userInfoFailure());
+        }
+    }catch(ex){
+        Toast.offline('更新用户信息失败')
+        yield put(userInfoFailure());
+    }
+}

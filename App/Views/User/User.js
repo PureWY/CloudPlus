@@ -25,8 +25,9 @@ class User extends Component {
   }
 
   getUserInfo(){
+    console.log(this.props.state.phone)
     this.props.userInfoRequest({
-      phone: this.props.state.phone
+      phone: this.props.state.login.phone
     })
   }
 
@@ -50,7 +51,8 @@ class User extends Component {
   }
 
   render () {
-    const state = this.props.state
+    const loginState = this.props.state.login
+    const userState = this.props.state.user
     const Item = List.Item;
     const footerButtons = [
       { text: '取消', onPress: () => {this.onClose()} },
@@ -70,8 +72,8 @@ class User extends Component {
             />
             </View>
             <View style={styles.headerName}>
-              <Text style={styles.userName}>{state.user_name?state.user_name:state.phone}</Text>
-              <Text style={styles.userSign}>{state.user_sign?state.user_sign:'设置一个签名吧'}</Text>
+              <Text style={styles.userName}>{userState.user_name?userState.user_name:loginState.phone}</Text>
+              <Text style={styles.userSign}>{userState.user_sign?userState.user_sign:'设置一个签名吧'}</Text>
             </View>
           </View>
         </View>
@@ -171,7 +173,7 @@ const mapDispatchToProps = (dispatch) => {
 
 const mapStateToProps = (state) => {
   return {
-      state: state.login
+      state: state
   }
 }
 

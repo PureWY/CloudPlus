@@ -3,11 +3,13 @@ const router = express.Router()
 const connection = require('../../Config/MySQL');
 const uuidv1 = require('uuid/v1');
 const bcrypt = require('bcrypt');
+const moment = require('moment');
 
 const saltRounds = 10;
 
 router.post('/',(req,res,next) => {
-    let user = { phone: req.body.phone, pass_word: req.body.passWord, user_id: uuidv1() }
+    let registerTime = moment().format('YYYY-MM-DD')
+    let user = { phone: req.body.phone, pass_word: req.body.passWord, user_id: uuidv1(), register_time: registerTime }
     let sqlQuery = 'SELECT * from `t_user_info` where phone = ?'
     let sqlInsert = 'INSERT INTO `t_user_info` SET ?'
 

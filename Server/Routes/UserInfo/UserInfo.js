@@ -23,4 +23,26 @@ router.post('/',(req,res,next) => {
     })
 })
 
+router.post('/update',(req,res,next) => {
+    let sqlInsert = 'UPDATE `t_user_info` SET ? where phone = ?'
+
+    connection.query(sqlInsert, [req.body,req.body.phone], function (err, data, fields) {
+        if(err){
+            console.log('报错：'+ err)
+            res.json({
+                code: 201,
+                message: err
+            })
+        }
+
+        console.log(data)
+        
+        res.json({
+            code: 200,
+            message: '用户信息更新成功'
+        })
+    })
+})
+
+
 module.exports = router

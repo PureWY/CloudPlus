@@ -9,8 +9,16 @@ const create = () => {
     )
   }
 
+  const userInfoUpdate = (data) => {
+    return request.post(
+      '/userInfo/update',
+      data
+    )
+  }
+
   return {
-    userInfoRequest
+    userInfoRequest,
+    userInfoUpdate
   }
 }
 

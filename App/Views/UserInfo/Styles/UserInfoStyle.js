@@ -14,5 +14,14 @@ export default StyleSheet.create({
   b_editBtn: {
       fontSize: Fonts.size.h6,
       color: Colors.black
+  },
+  b_saveBtn: {
+      fontSize: Fonts.size.h6,
+      color: Metrics.mainBackgroundColor
+  },
+  b_formInput: {
+    padding: 0,
+    fontSize: Fonts.size.regular,
+    color: Colors.black
   }
 })
