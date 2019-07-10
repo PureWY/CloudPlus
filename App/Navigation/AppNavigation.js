@@ -7,7 +7,8 @@ import Home from '../Views/Home/Home';
 import User from '../Views/User/User';
 import Message from '../Views/Message/Message';
 import Setting from '../Views/Setting/Setting'
-import UserInfo from '../Views/UserInfo/UserInfo'
+import UserInfo from '../Views/UserInfo/UserInfo';
+import SignIn from '../Views/SignIn/SignIn'
 
 import styles from './Styles/NavigationStyles';
 
@@ -87,6 +88,12 @@ const PrimaryNav = createStackNavigator({
         screen: UserInfo,
         navigationOptions: {
             title: '基本信息'
+        }
+    },
+    SignIn: {
+        screen: SignIn,
+        navigationOptions: {
+            title: '每日签到'
         }
     }
 },{
