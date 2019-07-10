@@ -39,7 +39,7 @@ router.post('/update',(req,res,next) => {
         
         res.json({
             code: 200,
-            message: '用户信息更新成功'
+            message: '信息更新成功'
         })
     })
 })

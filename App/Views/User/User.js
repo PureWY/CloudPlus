@@ -95,6 +95,9 @@ class User extends Component {
               size={20}
               />
             }
+            onPress={()=>{
+              this.props.navigation.navigate('SignIn')
+            }}
             arrow="empty"
           >
           <Text style={styles.b_optionFont}>每日签到</Text>

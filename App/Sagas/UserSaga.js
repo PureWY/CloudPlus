@@ -33,6 +33,7 @@ export function * userInfoUpdate (api, action) {
         });
         if(res.data.code == '200'){
             yield put(userInfoSuccess(action.payload));
+            Toast.success(res.data.message)
         }else{
             Toast.fail(res.data.message)
             yield put(userInfoFailure());

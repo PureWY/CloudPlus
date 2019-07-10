@@ -32,7 +32,6 @@ service.interceptors.response.use(
     } else if (response.data.code == -9001) {
         requestInfo.token = null
         console.log('token过期')
-        NavigationActions.navigate({routeName: 'Login'})        // TODO 跳转至登录页
         return response
     } else {
       return response
