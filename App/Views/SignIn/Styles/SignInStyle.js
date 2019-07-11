@@ -35,10 +35,10 @@ export default StyleSheet.create({
     justifyContent: 'center'
   },
   b_signBtn: {
-    width: 140,
-    height: 140,
-    borderRadius: 70,
-    backgroundColor: Metrics.mainBackgroundColor,
+    width: 130,
+    height: 130,
+    borderRadius: 65,
+    backgroundColor: '#E9C551',
     alignItems: 'center',
     justifyContent: 'center'
   },
@@ -47,9 +47,23 @@ export default StyleSheet.create({
     fontSize: Fonts.size.h4,
     fontWeight: '600'
   },
-  b_signBtnFontGrey: {
-    color: '#ccc',
-    fontSize: Fonts.size.h4,
-    fontWeight: '600'
+  b_signBtnB: {
+    width: 130,
+    height: 130,
+    borderRadius: 65,
+    backgroundColor: '#5CDF49',
+    alignItems: 'center',
+    justifyContent: 'center'
   },
+  signSuccessIcon: {
+    color: Colors.snow
+  },
+  c_signSuccess: {
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  b_signBtnFontSuccess: {
+    color: Colors.snow,
+    fontSize: Fonts.size.medium
+  }
 })
