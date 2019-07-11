@@ -2,6 +2,7 @@ import { put, select, call } from 'redux-saga/effects'
 import { Alert, ToastAndroid } from 'react-native'
 import { Toast } from '@ant-design/react-native';
 import { loginSuccess, loginFailure } from '../Actions/LoginAction'
+import { userInfoSuccess } from '../Actions/UserAction'
 import { NavigationActions } from 'react-navigation'
 
 // process LOGIN_REQUEST actions
@@ -15,6 +16,7 @@ export function * login (api, action) {
         });
         if(res.data.code == '200'){
             yield put(loginSuccess(res.data));
+            yield put(userInfoSuccess(res.data.body));
             yield put(NavigationActions.navigate({routeName: 'Home'}));
             storage.save({
                 key: 'loginDemo',
