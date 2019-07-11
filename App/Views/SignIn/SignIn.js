@@ -3,10 +3,14 @@ import { ScrollView, Text, Image, View, StatusBar } from 'react-native'
 import {Calendar, CalendarList, Agenda} from 'react-native-calendars';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import { connect } from 'react-redux'
+import moment from 'moment'
 
 // Styles
 import styles from './Styles/SignInStyle'
 import { Colors, Metrics, Fonts } from '../../Themes';
+
+const signDay = { selected: true, marked: true, selectedColor: '#0000FF' }
+const chooseStatus = { selected: true, marked: false, selectedColor: Metrics.mainBackgroundColor }
 
 export default class SignIn extends Component {
   constructor(props) {
@@ -16,27 +20,47 @@ export default class SignIn extends Component {
       signDay: ['2019-07-09','2019-07-10'],
       chooseDay: {},
       allSignDay: {},
-      canSign: true
+      canSign: true,
+      clickDay: ''
     }
   }
 
-  addSignIn(day){
-    let chooseStatus = { selected: true, marked: false, selectedColor: Metrics.mainBackgroundColor }
-    let signDay = { selected: true, marked: true, selectedColor: 'blue' }
+  componentDidMount(){
+    this.alreadySign()
+  }
 
-    // 选择日期
-    let dayString = day.dateString
-
-    let chooseDay = { 
+  alreadySign(){
+    let sign = {}
+    for(let i of this.state.signDay){
+      sign[i] = signDay
+    }
+    let dayString = moment().format('YYYY-MM-DD')
+    chooseDay = { 
       [dayString]: chooseStatus
     }
     this.setState({
-      chooseDay: chooseDay
+      clickDay: dayString,
+      allSignDay: {
+        ...sign,
+        ...chooseDay
+      }
     })
+    console.log(sign)
+  }
 
-    // 点击签到
-
-    console.log(day)
+  handleSignIn(){
+    let dayString = this.state.clickDay
+    let chooseDay = {
+      [dayString]: signDay
+    }
+    console.log(chooseDay)
+    this.setState({
+      canSign: false,
+      allSignDay: {
+        ...this.state.allSignDay,
+        ...chooseDay
+      }
+    })
   }
 
   render () {
@@ -58,7 +82,7 @@ export default class SignIn extends Component {
             }}
             pastScrollRange={50}
             futureScrollRange={50}
-            onDayPress={(day) => {this.addSignIn(day)}}
+            // onDayPress={(day) => {this.addSignIn(day)}}
             horizontal={true}
             maxDate={(new Date())}
             monthFormat={'yyyy年MM月'}
@@ -71,7 +95,11 @@ export default class SignIn extends Component {
             </View>
             <View style={styles.c_signBtn}>
               <View style={styles.b_signBtn}>
-                <Text style={this.state.canSign?styles.b_signBtnFont:styles.b_signBtnFontGrey}>点击签到</Text>
+                <Text               
+                onPress={()=>{this.handleSignIn()}}
+                style={styles.b_signBtnFont}>{
+                  this.state.canSign?'点击签到':'签到成功'
+                }</Text>
               </View>
             </View>
           </View>
