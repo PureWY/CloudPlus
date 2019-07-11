@@ -46,7 +46,7 @@ const ApplicationStyles = {
       marginHorizontal: Metrics.smallMargin
     },
     noChoose: {
-      color: Colors.grey,
+      color: '#ccc',
       fontSize: 16,
       padding: Metrics.smallMargin,
       marginBottom: Metrics.smallMargin,
