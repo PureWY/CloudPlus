@@ -21,11 +21,11 @@ router.post('/',(req,res,next) => {
                 if(match){
                     //创建token
                     let token = jwt.generateToken(req.body.phone)
+                    let { pass_word,...otherData } = data[0]
                     res.json({
                         code: 200,
                         body: {
-                            userName: data[0].user_name,
-                            phone: data[0].phone
+                            ...otherData
                         },
                         token: token,
                         message: '登录成功'

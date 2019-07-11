@@ -20,7 +20,6 @@ class User extends Component {
   }
 
   componentDidMount(){
-    console.log(this.props.state)
     this.getUserInfo()
   }
 
